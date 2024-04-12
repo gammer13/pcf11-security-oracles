@@ -1,0 +1,158 @@
+openapi: 3.0.0
+info:
+  title: Off-Chain Threat Intelligence System API
+  description: This API interfaces with the off-chain threat intelligence system to provide comprehensive threat data, analysis, and management capabilities.
+  version: 1.0.0
+  contact:
+    name: Team Sentinel
+    email: shay.gammer@gmail.com
+
+paths:
+  /threat-data:
+    get:
+      summary: Retrieve threat data based on transaction context
+      operationId: getThreatData
+      tags:
+        - Threat Data
+      parameters:
+        - in: query
+          name: address
+          required: true
+          schema:
+            type: string
+          description: Blockchain address involved in the transaction.
+        - in: query
+          name: script_hash
+          schema:
+            type: string
+          description: Specific smart contract's script hash involved, if applicable.
+        - in: query
+          name: asset_name
+          schema:
+            type: string
+          description: Name of the asset being used in the transaction, if applicable.
+      responses:
+        '200':
+          description: Successfully returns threat data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThreatDataResponse'
+        '204':
+          description: No threat intelligence found.
+        '400':
+          description: Bad request due to missing or incorrect parameters.
+        '401':
+          description: Unauthorized access due to missing or invalid API key.
+        '500':
+          description: Internal server error.
+
+  /analyze-threat:
+    post:
+      summary: Request analysis of potential threats based on specific parameters
+      operationId: analyzeThreat
+      tags:
+        - Threat Analysis
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThreatAnalysisRequest'
+      responses:
+        '202':
+          description: Threat analysis request accepted and being processed.
+        '400':
+          description: Bad request due to incorrect or incomplete request data.
+        '401':
+          description: Unauthorized access due to missing or invalid API key.
+        '500':
+          description: Internal server error during processing.
+
+  /update-threat/{id}:
+    put:
+      summary: Update existing threat information
+      operationId: updateThreat
+      tags:
+        - Threat Management
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the threat entry to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ThreatUpdateRequest'
+      responses:
+        '200':
+          description: Threat information updated successfully.
+        '404':
+          description: Threat entry not found.
+        '400':
+          description: Bad request due to malformed request or validation failure.
+        '401':
+          description: Unauthorized access due to missing or invalid API key.
+        '500':
+          description: Internal server error during update.
+
+  /delete-threat/{id}:
+    delete:
+      summary: Delete a specific threat entry
+      operationId: deleteThreat
+      tags:
+        - Threat Management
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the threat entry to delete.
+      responses:
+        '200':
+          description: Threat entry deleted successfully.
+        '404':
+          description: Threat entry not found.
+        '401':
+          description: Unauthorized access due to missing or invalid API key.
+        '500':
+          description: Internal server error during deletion.
+
+components:
+  schemas:
+    ThreatDataResponse:
+      type: object
+      properties:
+        risk_score:
+          type: integer
+        report_handle:
+          type: string
+        risk_category:
+          type: string
+    ThreatAnalysisRequest:
+      type: object
+      properties:
+        address:
+          type: string
+        script_hash:
+          type: string
+        asset_name:
+          type: string
+    ThreatUpdateRequest:
+      type: object
+      properties:
+        new_data:
+          type: object
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+
+security:
+  - ApiKeyAuth: []
