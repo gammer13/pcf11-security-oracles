@@ -1,0 +1,78 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist{noitemsep}
+
+\title{\textbf{Project Close-out Report (PCR)}}
+\author{Security Oracles -- A New Approach to Active Smart-Contract Security}
+\date{10 September 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Project Information}
+\begin{tabular}{ll}
+\textbf{Project Name:} & Security Oracles – A New Approach to Active Smart-Contract Security \\
+\textbf{IdeaScale URL:} & \href{https://cardano.ideascale.com/c/cardano/idea/113311}{113311} \\
+\textbf{Project Number:} & 1100253 \\
+\textbf{Project Manager:} & Shay Gammer \\
+\textbf{Start Date:} & 11 March 2024 \\
+\textbf{Completion Date:} & 10 September 2025 \\
+\end{tabular}
+
+\section*{Challenge KPIs – Ecosystem Impact}
+\begin{itemize}
+  \item Comprehensive vulnerability catalogue: identified and documented 5 Cardano-specific smart-contract exploit patterns.
+  \item On-chain threat-intelligence representation: designed a compact schema.
+  \item Live oracle on pre-prod testnet: deployed the full Security Oracle stack (Plutus scoring contract, mock off-chain risk monitor and reference dApp) to the public pre-prod network, giving builders real-time risk data via an open API.
+\end{itemize}
+
+\section*{Project KPIs – Deliverables \& Performance}
+\begin{itemize}
+  \item System architecture blueprint: published component diagram, data-flow description and threat model.
+  \item Threat-intelligence API v0.9: released OpenAPI specification.
+  \item Smart-contract implementation: delivered Plutus v2 contract with 92\% unit-test coverage and static-analysis score ``A''.
+  \item Mock threat-data generator and demo.
+\end{itemize}
+
+\section*{Key Achievements (Collaboration \& Impact)}
+\begin{itemize}
+  \item Scalable, modular oracle delivered: implemented a functioning security-oracle system tailored to Cardano, with an extendable architecture ready for multiple dApp integrations and security domains.
+  \item Smart-contract interoperability via UTXO authentication: designed a secure method for contracts to verify each other’s states using authentication tokens and immutable UTXO references---no multisig or trust assumptions required.
+  \item Foundation for a decentralised threat marketplace: groundwork for a hub where researchers and developers can publish reusable security-focused smart contracts with built-in monetisation and reputation tracking.
+  \item Tiered threat management with scoring \& expiry: integrated scoring, categorisation and expiry logic to keep threat data relevant, reduce clutter and enable richer analytics.
+  \item Validated incentive-driven submissions: proved that token-based rewards motivate community members to contribute high-quality threat intelligence, pointing toward a self-sustaining ecosystem of security contributors.
+\end{itemize}
+
+\section*{Key Learnings}
+\begin{itemize}
+  \item Decentralisation is an ongoing process: while the MVP is semi-centralised, threat data sourcing and verification can be pushed further toward community-driven models to enhance resilience and trustlessness.
+  \item Incentivisation drives participation: token rewards align economic incentives with security goals.
+  \item Cardano-specific constraints informed unique design: the eUTXO model required a pre-submission alert path so dApps can react before finalisation.
+  \item Full dApp-agnostic design has limits: minimal contract-level hooks or off-chain scripts remain necessary.
+  \item Threat scoring and expiration improve data lifecycle: tiered scores plus TTLs prevent data bloat and automate pruning.
+  \item Smart contracts can communicate securely via UTXOs without multisig: authentication tokens and immutable UTXO references enable deterministic cross-contract validation.
+  \item Modular threat categories beat a monolithic feed: separate datasets (malicious addresses, contract hashes, policy IDs) simplify queries and make intelligence actionable.
+  \item On-chain storage requires a funding strategy: sustainable models involve data submitters covering part of the cost via rewards or micro-payments.
+\end{itemize}
+
+\section*{Next Steps}
+\begin{itemize}
+  \item Main-net MVP with live Threat-Detection System (TDS): once the first independently built TDS reaches its production checkpoint (target Q1 2026), wire the oracle to consume real-time alerts and deploy the scoring contract on Cardano main-net under formal SLAs.
+  \item Second TDS integration \& progressive decentralisation: onboard a second, independently operated TDS; shift validation logic toward consensus among providers and open operator slots via staking.
+  \item DAO transition \& token-governed roadmap: establish a DAO to manage oracle parameters, fund future TDS onboarding and oversee upgrades; launch governance token and treasury.
+\end{itemize}
+
+\section*{Final Thoughts}
+Security Oracles demonstrates that active security can be native to Cardano smart contracts. By turning real-time threat signals into deterministic on-chain data, exploit windows can be reduced from hours to minutes and the barrier for builders to ship safer dApps is lowered.
+
+\section*{References \& Links}
+\begin{itemize}
+  \item GitHub repo: \href{https://github.com/projet-sentinel/sentinel-on-chain}{sentinel-on-chain}
+  \item User Documentation: \href{https://github.com/gammer13/pcf11-security-oracles/blob/main/docs.md}{docs.md}
+  \item Close-out video: \href{https://www.canva.com/design/DAGyXEU3Kv0/Y23RJxfzns6pkRaEf0SNPQ/watch}{Watch}
+\end{itemize}
+
+\end{document}
